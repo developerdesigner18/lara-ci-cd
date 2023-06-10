@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  PRIVATE_KEY_PATH: ${{ secrets.PRIVATE_KEY_PATH }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,6 +20,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
+          
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-interaction
@@ -26,4 +30,4 @@ jobs:
 
       - name: Deploy to server
         run: |
-          sshpass -p 'DDSnewpwd123!@#2022' root@143.110.242.52 "cd /var/www/html/lara_ci_cd && git pull origin master && composer install --no-interaction && php artisan migrate"
+          ssh -i $PRIVATE_KEY_PATH root@143.110.242.52 "cd /var/www/html/lara_ci_cd && git pull origin master && composer install --no-interaction && php artisan migrate"

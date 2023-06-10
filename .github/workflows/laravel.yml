@@ -28,6 +28,6 @@ jobs:
       - name: Run tests
         run: vendor/bin/phpunit
 
-      - name: Deploy to server
+      - name: ${{ secrets.PRIVATE_KEY_PATH }}
         run: |
           ssh -i $PRIVATE_KEY_PATH root@143.110.242.52 "cd /var/www/html/lara_ci_cd && git pull origin master && composer install --no-interaction && php artisan migrate"

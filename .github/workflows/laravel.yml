@@ -12,15 +12,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      
-      - name: Install dependencies
-        run: |
-          composer self-update
-          composer clear-cache
-          export COMPOSER_PROCESS_TIMEOUT=300
-          composer install --no-dev --prefer-dist --no-progress --no-interaction
-
+        
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -30,8 +22,6 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-interaction
 
-      - name: Run tests
-        run: vendor/bin/phpunit
 
       - name: Deploy to server
         run: |

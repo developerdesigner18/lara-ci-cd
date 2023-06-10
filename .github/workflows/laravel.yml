@@ -26,4 +26,4 @@ jobs:
 
       - name: Deploy to server
         run: |
-          ssh root@143.110.242.52 "cd /var/www/html/lara_ci_cd && git pull origin master && composer install --no-interaction && php artisan migrate"
+          sshpass -p 'DDSnewpwd123!@#2022' ssh root@143.110.242.52 "cd /var/www/html/lara_ci_cd && git pull origin master && composer install --no-interaction && php artisan migrate"

@@ -5,9 +5,6 @@ on:
     branches:
       - master
 
-env:
-  PRIVATE_KEY_PATH: ${{ secrets.PRIVATE_KEY_PATH }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,35 +15,9 @@ jobs:
 
       - name: Set up SSH
         run: |
-          mkdir -p .ssh/
-          echo "-----BEGIN RSA PRIVATE KEY-----
-            MIIEowIBAAKCAQEAwxl7g15HWeB+Ke8lts8TtHPw08Mt6wOrCdsJVKo9j5VQPZk/
-            cASw8vUfAZJPtkHpLC+DJvVWkQJ1PKo+DFrkxjQIJ1hHZmas/uN1NcKzkLruk0Y4
-            yN5W5hf4aD+sMOPSD+a4U2XtJ2OgpjPDslGGMIZwXybrBn1wymCFpyI9mN+TZM2M
-            NjbDFDGVxazjzi5S2rCB+NRX43iSRBUr/Gr7RybVLyPVbQ/GWogbrtEMw1KrRTnY
-            sRh0CcNMAvmtP7S6T/f32fhhfa9KKnmHllZkN9XMW/O0TEF8mU3Ve5sDV+gNZ9MA
-            +OUZMYfMQZxFEZmXK6h+7ZlmoaIKTe4ff2J5vwIDAQABAoIBACQrd0CVm/jHq9wu
-            X/mSTn7n97/qsXqehXkgSIyPuzYBYozo+l/UHtIMK6Fo9Ko/cfElJdV1KoVbxUxn
-            63Ty7PLp9pEExsfvRSdEGBjNbejpHw3iuOhUgBvMWdtJ4qx1sB4OkiG0BdGFoOTv
-            N9q5Tn10jyS03GGpo92BI4YmzPCoPutkbHFqpLGfqwH/cJ7Xg4DOov5sqYlSy46G
-            HVzh2kE8hWaGpLSWKKW+DEVBLWe5CCNgNOHNAce3r9CxEdSe4laHYFQNmJGTqsmv
-            bLAxIOZexhC3U44WFW/sUJlgBgzP4R0mGTX71d87p9pnA0TSPJapCpjvvH8gygo1
-            Nz0FKdECgYEA/dU2QpWoEKTwcaD2SE+3dVPHDSs9YkkQIdQ8wQauyf1XBnJF/oYm
-            jpYOsVCylaJnzaQ38K8SIa6EYi023+n/bUV9tmYDqsFpG8/nqmBFJng2y4DhzOO5
-            l+W5WgNLIPX2HLX7qqJG50S+IpCUUiOShRSSza6lujDgXDOMci8qfM0CgYEAxMPm
-            g511U5JvBKwD4QTYfwrkJpx2N63JDCiCaaHvc+5EesXiMjF6/vcHDChRZgr+184X
-            A1B91t8HTG83RAyqJ+LJq95Gyg2OnKXI+anp8Zy8czEssv+m9eT5JMCnNdgbXYU7
-            SRrMouEqxcFnvWpkl3Gxf9D1qoakaQ6OUJm+kLsCgYBSMAsVnCeC3CUOZbPYzhb0
-            4l99IBcMD+QtT+8sAOHvfRwEdlO7iexKFsRDHYH1eVRq/VUvlUAlr8AlmcY+0iFm
-            XC3MNVPSojVKUBMO04UQY7Q6SEzUbpfVWwic4Jwe3AUIXtRR96FFmLiHsJCV1/bF
-            KFgwSPBYTSMYN4iuIB99sQKBgGfxyUuMGdftSoKgUGhFxAzQ9xfCndzqDIREvigJ
-            aNLIcxqcgNLdOsmIPAvbHK0Yb+oXMCcLFX82UMe7FOn4+saZUspdYO4KXWU5W0Mw
-            1KpTj2YW+zMQROYvcMJOl8alBEfSQzBqXOJKqurPMftpQfyTDh6kh7Lu79mj2+CO
-            Z5JTAoGBAKbiFNam7PtTQWZg/FdKnDFq9f6S+HI+vPtz+VMKX3hgF4VGX3nsmDjU
-            IOLJKHr+ubpXcbM7Lph+hEO7tm37r98+A3du9AImZt+o7DQcGkQuyLepzVETvV7l
-            2nSwKZMunQbPjxF6vY921QgdWljDOfNegV8fVpaLgzfwE4dYH++f
-            -----END RSA PRIVATE KEY-----" > .ssh/private_key.pem
-          chmod 600 .ssh/private_key.pem
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.PRIVATE_KEY_PATH }}" > ~/.ssh/private_key.pem
+          chmod 600 ~/.ssh/private_key.pem
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -61,4 +32,4 @@ jobs:
 
       - name: deploy to server
         run: |
-          ssh -i .ssh/private_key.pem root@143.110.242.52 "cd /var/www/html/lara_ci_cd && git pull origin master && composer install --no-interaction && php artisan migrate"
+          ssh -i ~/.ssh/private_key.pem root@143.110.242.52 "cd /var/www/html/lara_ci_cd && git pull origin master && composer install --no-interaction && php artisan migrate"

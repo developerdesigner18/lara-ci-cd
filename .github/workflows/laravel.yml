@@ -17,7 +17,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh/
           echo "${{ secrets.PRIVATE_KEY_PATH }}" > ~/.ssh/private_key.pem
-          chmod 600 ~/.ssh/private_key.pem
+          chmod 755 ~/.ssh/private_key.pem
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2

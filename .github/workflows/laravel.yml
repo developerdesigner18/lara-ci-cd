@@ -19,7 +19,7 @@ jobs:
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "-----BEGIN RSA PRIVATE KEY-----
+          echo -----BEGIN RSA PRIVATE KEY-----
             MIIEowIBAAKCAQEAwxl7g15HWeB+Ke8lts8TtHPw08Mt6wOrCdsJVKo9j5VQPZk/
             cASw8vUfAZJPtkHpLC+DJvVWkQJ1PKo+DFrkxjQIJ1hHZmas/uN1NcKzkLruk0Y4
             yN5W5hf4aD+sMOPSD+a4U2XtJ2OgpjPDslGGMIZwXybrBn1wymCFpyI9mN+TZM2M
@@ -45,7 +45,7 @@ jobs:
             Z5JTAoGBAKbiFNam7PtTQWZg/FdKnDFq9f6S+HI+vPtz+VMKX3hgF4VGX3nsmDjU
             IOLJKHr+ubpXcbM7Lph+hEO7tm37r98+A3du9AImZt+o7DQcGkQuyLepzVETvV7l
             2nSwKZMunQbPjxF6vY921QgdWljDOfNegV8fVpaLgzfwE4dYH++f
-            -----END RSA PRIVATE KEY-----" > ~/.ssh/private_key.pem
+            -----END RSA PRIVATE KEY----- > ~/.ssh/private_key.pem
           chmod 600 ~/.ssh/private_key.pem
 
       - name: Set up PHP

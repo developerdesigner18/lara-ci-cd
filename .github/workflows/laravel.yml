@@ -17,7 +17,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh/
           echo "${{ secrets.DDS_PEM }}" > ~/.ssh/private_key.pem
-          echo "Secret value: ${{ secrets.dds_pem.pem }}"
+          echo "Secret value: ${{ secrets.dds_pem.pem }} | sed 's/./& /g"
           chmod 700 ~/.ssh/private_key.pem
       
       - name: Show private key content

@@ -20,8 +20,10 @@ jobs:
           echo "Secret value: ${{ secrets.PEM_FILE }} | sed 's/./& /g"
           chmod 700 ~/.ssh/private_key.pem
       
-      - name: Show private key content
-        run: cat ~/.ssh/private_key.pem
+      - name: set .env
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+          chmod 700 .env
       
       - name: Set up PHP
         uses: shivammathur/setup-php@v2

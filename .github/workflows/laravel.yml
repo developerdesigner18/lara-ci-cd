@@ -20,7 +20,7 @@ jobs:
           chmod 700 ~/.ssh/private_key.pem
       
       - name: Show private key content
-        run: cat ssh/private_key.pem
+        run: cat ~/.ssh/private_key.pem
       
       - name: Set up PHP
         uses: shivammathur/setup-php@v2

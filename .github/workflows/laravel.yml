@@ -15,10 +15,13 @@ jobs:
 
       - name: Set up SSH
         run: |
-          mkdir -p ssh/
-          echo "${{ secrets.DDS_PEM }}" > ssh/private_key.pem
-          chmod 600 ssh/private_key.pem
-
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.DDS_PEM }}" > ~/.ssh/private_key.pem
+          chmod 700 ~/.ssh/private_key.pem
+      
+      - name: Show private key content
+        run: cat ssh/private_key.pem
+      
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -32,8 +35,8 @@ jobs:
 
       - name: add known host
         run: |
-          ssh-keyscan 143.110.242.52 >> ssh/known_hosts
+          ssh-keyscan 143.110.242.52 >> ~/.ssh/known_hosts
 
       - name: deploy to server
         run: |
-         ssh -i  ssh/private_key.pem  -o "StrictHostKeyChecking no" root@143.110.242.52 "cd /var/www/html/lara_ci_cd && git pull origin master && composer install --no-interaction && php artisan migrate"
+         ssh -i ~/.ssh/private_key.pem root@143.110.242.52 "cd /var/www/html/lara_ci_cd && git pull origin master && composer install --no-interaction && php artisan migrate"

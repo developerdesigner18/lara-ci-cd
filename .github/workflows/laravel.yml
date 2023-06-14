@@ -16,7 +16,7 @@ jobs:
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "${{ secrets.PRIVATE_KEY_PATH }}" > ~/.ssh/private_key.pem
+          echo "${{ secrets.DDS_PEM }}" > ~/.ssh/private_key.pem
           chmod 700 ~/.ssh/private_key.pem
 
       - name: Set up PHP

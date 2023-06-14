@@ -13,10 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+       
+            
+
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
           echo "${{ secrets.DDS_PEM }}" > ~/.ssh/private_key.pem
+          echo "Secret value: ${{ secrets.DDS_PEM }}"
           chmod 700 ~/.ssh/private_key.pem
       
       - name: Show private key content

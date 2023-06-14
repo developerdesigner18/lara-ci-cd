@@ -32,7 +32,7 @@ jobs:
 
       - name: add known host
         run: |
-          ssh-keyscan 143.110.242.52 >> ~/.ssh/known_hosts
+          ssh-keyscan 143.110.242.52 >> ssh/known_hosts
 
       - name: deploy to server
         run: |

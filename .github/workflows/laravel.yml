@@ -17,7 +17,6 @@ jobs:
         run: |
           mkdir -p ~/.ssh/
           echo "${{ secrets.PEM_FILE }}" > ~/.ssh/private_key.pem
-          echo "Secret value: ${{ secrets.PEM_FILE }} | sed 's/./& /g"
           chmod 700 ~/.ssh/private_key.pem
       
       - name: set .env
